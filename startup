@@ -1,0 +1,86 @@
+#!/usr/bin/env python3
+import os
+import platform
+import sys
+import datetime
+from subprocess import call
+
+header="Welcome to GLaDOS"
+cmd=""
+def adapt_resolution():
+	global term_width
+	global term_height
+	global offset_str
+	global header_separator
+	global footer_separator
+	
+	term_width=os.get_terminal_size().columns #We have check this every time
+	term_height=os.get_terminal_size().lines
+	offset_str=""
+	header_separator=""
+	footer_separator=""
+	for i in range(term_width-40): #40 is the width of ascii art
+		offset_str+=" "
+	for i in range(term_width): #40 is the width of ascii art
+		header_separator+="¯"
+		footer_separator+="_"
+
+def insert_in_offset(insert_string): #Inserts a string into the offset
+	str=insert_string
+	for i in range((term_width-len(insert_string))-40): #40 is the width of ascii art
+		str+=" "
+	return str
+
+def show_intro():
+	call("tput setab 94",shell=True)
+	call("tput setaf 136",shell=True) #Color the screen properly
+	adapt_resolution()
+	time=str(datetime.datetime.now()).split(".")[0]
+	gap_length=""
+	for i in range(term_width-len(time)-len(header)):
+		gap_length+=" "
+	
+	print("\033[1m"+header+gap_length+time+"\033[0m")
+	call("tput setab 94",shell=True)
+	call("tput setaf 136",shell=True) #Color the screen properly
+	print(header_separator)
+	print(insert_in_offset("  System Specifications:")+"              .,-:;//;:=,               ")
+	print(insert_in_offset("    OS: "+platform.system()+" "+platform.release())+"          . :H@@@MM@M#H/.,+%;,          ")
+	print(insert_in_offset("    CPU: "+platform.architecture()[0]+" "+platform.machine().replace("_","-"))+"       ,/X+ +M@@M@MM%=,-%HMMM@X/,       ")
+	print(offset_str+"     -+@MM; $M@@MH+-,;XMMMM@MMMM@+-     ")
+	print(offset_str+"    ;@M@@M- XM@X;. -+XXXXXHHH@M@M#@/.   ")
+	print(offset_str+"  ,%MM@@MH ,@%=             .---=-=:=,. ")
+	print(offset_str+"  =@#@@@MX.,                -%HX$$%%%:; ")
+	print(offset_str+" =-./@M@M$                   .;@MMMM@MM:")
+	print(offset_str+" X@/ -$MM/                    . +MM@@@M$")
+	print(offset_str+",@M@H: :@:                    . =X#@@@@-")
+	print(offset_str+",@@@MMX, .                    /H- ;@M@M=")
+	print(offset_str+".H@@@@M@+,                    %MM+..%#$.")
+	print(offset_str+" /MMMM@MMH/.                  XM@MH; =; ")
+	print(offset_str+"  /%+%$XHH@$=              , .H@@@@MX,  ")
+	print(offset_str+"   .=--------.           -%H.,@@@@@MX,  ")
+	print(offset_str+"   .%MM@@@HHHXX$$$%+- .:$MMX =M@@MM%.   ")
+	print(offset_str+"     =XMMM@MM@MM#H;,-+HMM@M+ /MMMX=     ")
+	print(offset_str+"       =%@M@M#@$-.=$@MM@@@M; %M%=       ")
+	print(offset_str+"         ,:+$+-,/H#MMMMMMM@= =,         ")
+	print(offset_str+"               =++%%%%+/:-.             ")
+	print(footer_separator)
+
+def clear_console():
+	adapt_resolution()
+	for i in range(term_height): #Scroll up!
+		print("")
+	
+show_intro()
+while 1==1:
+	call("tput setab 94",shell=True)
+	call("tput setaf 136",shell=True)
+	clear_console()
+	call(cmd,shell=True)
+	adapt_resolution()
+	print(footer_separator)
+	if cmd=="":
+		show_intro()
+	if cmd=="exit":
+		sys.exit()
+	cmd=input(">")
