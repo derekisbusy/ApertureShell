@@ -72,6 +72,8 @@ def clear_console():
 		print("")
 	
 show_intro()
+if platform.system()=="Darwin":
+	call("say Hello, and, again, welcome, to the aperture science computer aided enrichment centre",shell=True)
 while 1==1:
 	call("tput setab 94",shell=True)
 	call("tput setaf 136",shell=True)
