@@ -35,7 +35,7 @@ def show_intro():
 	call("tput setab 94",shell=True)
 	call("tput setaf 136",shell=True) #Color the screen properly
 	adapt_resolution()
-	time=str(datetime.datetime.now()).split(".")[0]
+	time="| "+str(datetime.datetime.now()).split(".")[0]
 	gap_length=""
 	for i in range(term_width-len(time)-len(header)):
 		gap_length+=" "
@@ -78,11 +78,14 @@ while 1==1:
 	call("tput setab 94",shell=True)
 	call("tput setaf 136",shell=True)
 	clear_console()
-	call(cmd,shell=True)
+	if cmd.split(" ")[0]!="cd":
+		call(cmd,shell=True)
+	else:
+		os.chdir(cmd.split(" ")[1]) #Fix for the cd command which doesn't work through 'call'
 	adapt_resolution()
 	print(footer_separator)
 	if cmd=="":
 		show_intro()
-	if cmd=="exit":
+	elif cmd=="exit":
 		sys.exit()
 	cmd=input(">")
