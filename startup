@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+#Released under the MIT licence
 import os
 import platform
 import sys
