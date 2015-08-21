@@ -6,6 +6,10 @@ import sys
 import datetime
 from subprocess import call
 
+#####################################################
+exec(compile(open("config.txt", "rb").read(), "config.txt", 'exec')) #Takes config in
+#####################################################
+
 header="Welcome to GLaDOS"
 cmd=""
 
@@ -41,8 +45,8 @@ def insert_in_offset(insert_string): #Inserts a string into the offset
 	return str
 
 def show_intro():
-	call("tput setab 94",shell=True)
-	call("tput setaf 136",shell=True) #Color the screen properly
+	call("tput setab "+str(background_color),shell=True)
+	call("tput setaf "+str(foreground_color),shell=True) #Color the screen properly
 	adapt_resolution()
 	time="| "+str(datetime.datetime.now()).split(".")[0]
 	gap_length=""
@@ -50,15 +54,24 @@ def show_intro():
 		gap_length+=" "
 	
 	print("\033[1m"+header+gap_length+time+"\033[0m")
-	call("tput setab 94",shell=True)
-	call("tput setaf 136",shell=True) #Color the screen properly
+	call("tput setab "+str(background_color),shell=True)
+	call("tput setaf "+str(foreground_color),shell=True) #Color the screen properly
 	print(header_separator)
-	print(insert_in_offset("  System Specifications:")+ascii_file[0].replace("\n",""))
-	print(insert_in_offset("    OS: "+platform.system()+" "+platform.release())+ascii_file[1].replace("\n",""))
-	print(insert_in_offset("    CPU: "+platform.architecture()[0]+" "+platform.machine().replace("_","-"))+ascii_file[2].replace("\n",""))
 	
-	for i in range(3,ascii_lines):
-		print(offset_str+ascii_file[i].replace("\n",""))
+	if alignment==1:
+		print(insert_in_offset("  System Specifications:")+ascii_file[0].replace("\n",""))
+		print(insert_in_offset("    OS: "+platform.system()+" "+platform.release())+ascii_file[1].replace("\n",""))
+		print(insert_in_offset("    CPU: "+platform.architecture()[0]+" "+platform.machine().replace("_","-"))+ascii_file[2].replace("\n",""))
+	
+		for i in range(3,ascii_lines):
+			print(offset_str+ascii_file[i].replace("\n",""))
+	elif alignment==0:
+		print(ascii_file[0].replace("\n","")+insert_in_offset("  System Specifications:"))
+		print(ascii_file[1].replace("\n","")+insert_in_offset("    OS: "+platform.system()+" "+platform.release()))
+		print(ascii_file[2].replace("\n","")+insert_in_offset("    CPU: "+platform.architecture()[0]+" "+platform.machine().replace("_","-")))
+	
+		for i in range(3,ascii_lines):
+			print(ascii_file[i].replace("\n","")+offset_str)
 	
 	print(footer_separator)
 
@@ -71,8 +84,8 @@ show_intro()
 if platform.system()=="Darwin":
 	call("say Hello, and, again, welcome, to the aperture science computer aided enrichment centre",shell=True)
 while 1==1:
-	call("tput setab 94",shell=True)
-	call("tput setaf 136",shell=True)
+	call("tput setab "+str(background_color),shell=True)
+	call("tput setaf "+str(foreground_color),shell=True)
 	clear_console()
 	if cmd.split(" ")[0]!="cd":
 		call(cmd,shell=True)
@@ -84,4 +97,4 @@ while 1==1:
 		show_intro()
 	elif cmd=="exit":
 		sys.exit()
-	cmd=input(">")
+	cmd=input(input_prompt)
