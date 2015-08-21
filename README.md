@@ -14,3 +14,7 @@ You also have the ability to modify other settings such as the background and fo
 You can also choose whether to align the ascii art to the left or to the right, 0 is left and 1 is right.  
 
 ![Screenshot](https://slimgur.com/images/2015/08/21/c922f76b3bc5237658f1cdfe605b858d.png)
+
+To do:
+
+Add auto-update via downloading the latest version from GitHub
