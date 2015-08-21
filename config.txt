@@ -1,4 +1,4 @@
-alignment = 0 #If the image is left or right of the text, 0 is left, 1 is right
+alignment = 1 #If the image is left or right of the text, 0 is left, 1 is right
 
 foreground_color = 136 #List of colors: https://slimgur.com/images/2015/08/21/57981e571fb1ada8a5a50bcda7423f75.png
 background_color = 94 #List of colors: https://slimgur.com/images/2015/08/21/57981e571fb1ada8a5a50bcda7423f75.png

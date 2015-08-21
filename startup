@@ -7,14 +7,20 @@ import datetime
 from subprocess import call
 
 #####################################################
-exec(compile(open("config.txt", "rb").read(), "config.txt", 'exec')) #Takes config in
+with open("config.txt", "rb") as _file:
+	
+	exec(compile(_file.read(), "config.txt", 'exec')) #Takes config in
+	_file.close()
 #####################################################
 
 header="Welcome to GLaDOS"
 cmd=""
 
 #Get ascii art
-ascii_file=open("ascii.txt",'r').readlines()
+with open("ascii.txt",'r') as _file:
+	ascii_file=_file.readlines()
+	_file.close()
+
 ascii_lines=0
 
 for i in ascii_file:
@@ -90,7 +96,10 @@ while 1==1:
 	if cmd.split(" ")[0]!="cd":
 		call(cmd,shell=True)
 	else:
-		os.chdir(cmd.split(" ")[1]) #Fix for the cd command which doesn't work through 'call'
+		try:
+			os.chdir(cmd.split(" ")[1]) #Fix for the cd command which doesn't work through 'call'
+		except:
+			print("Error: Could not change directory to "+cmd.split(" ")[1])
 	adapt_resolution()
 	print(footer_separator)
 	if cmd=="":
