@@ -77,8 +77,11 @@ def show_intro():
 		print(ascii_file[2].replace("\n","")+insert_in_offset("    CPU: "+platform.architecture()[0]+" "+platform.machine().replace("_","-")))
 	
 		for i in range(3,ascii_lines):
-			print(ascii_file[i].replace("\n","")+offset_str)
+			if (i+4)<term_height: #Cut off if it the ascii art is bigger than the screen size
+				print(ascii_file[i].replace("\n","")+offset_str)
 	
+	for i in range(term_height-ascii_lines-4): #Fill in any excess space with whitespace so as to make it look more pleasing when resized
+		print("")
 	print(footer_separator)
 
 def clear_console():
