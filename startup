@@ -13,7 +13,6 @@ with open("config.txt", "rb") as _file:
 	_file.close()
 #####################################################
 
-header="Welcome to GLaDOS"
 cmd=""
 
 #Get ascii art
