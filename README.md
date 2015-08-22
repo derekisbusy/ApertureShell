@@ -1,5 +1,5 @@
 # ApertureShell
-ApertureShell is a script that turns your terminal into a Portal themed terminal! It requires Python 3, to install it just drop 'startup', 'ascii.txt' and 'config.txt' in /usr/bin/ and have your terminal open it on startup.
+ApertureShell is a script that turns your terminal into a Portal themed terminal! It requires Python 3, to install it just drop 'startup' in /usr/bin/ and 'ascii.txt' and 'config.txt' in your home folder (/Users/YOURUSERNAME) and have your terminal open it on startup.
 
 ![Screenshot](https://slimgur.com/images/2015/06/25/8d22965090c05bbb59d2cda0611e084f.png)
 
