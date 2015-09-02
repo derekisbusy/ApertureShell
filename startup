@@ -4,6 +4,7 @@ import os
 import platform
 import sys
 import datetime
+import getpass
 from subprocess import call
 
 #####################################################
@@ -53,7 +54,7 @@ def show_intro():
 	call("tput setab "+str(background_color),shell=True)
 	call("tput setaf "+str(foreground_color),shell=True) #Color the screen properly
 	adapt_resolution()
-	time="| "+str(datetime.datetime.now()).split(".")[0]
+	time=getpass.getuser()+"| "+str(datetime.datetime.now()).split(".")[0]
 	gap_length=""
 	for i in range(term_width-len(time)-len(header)):
 		gap_length+=" "
